@@ -71,3 +71,21 @@ exports.updateSection = async (req, res) => {
 		});
 	}
 };
+// DELETE a section
+exports.deleteSection = async (req, res) => {
+	try {
+		const { sectionId } = req.params; //get ID - asssuming that we are sending id in params
+		await Section.findByIdAndDelete(sectionId);
+        
+		res.status(200).json({
+			success: true,
+			message: "Section deleted",
+		});
+	} catch (error) {
+		console.error("Error deleting section:", error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server error",
+		});
+	}
+};
