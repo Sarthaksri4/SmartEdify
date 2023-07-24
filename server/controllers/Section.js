@@ -50,3 +50,24 @@ exports.createSection = async (req, res) => {
 		});
 	}
 };
+// UPDATE a section
+exports.updateSection = async (req, res) => {
+	try {
+		const { sectionName, sectionId } = req.body;
+		const section = await Section.findByIdAndUpdate(
+			sectionId,
+			{ sectionName },
+			{ new: true }
+		);
+		res.status(200).json({
+			success: true,
+			message: section,
+		});
+	} catch (error) {
+		console.error("Error updating section:", error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server error",
+		});
+	}
+};
