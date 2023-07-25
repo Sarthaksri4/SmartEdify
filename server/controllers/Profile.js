@@ -60,3 +60,23 @@ exports.deleteAccount = async (req, res) => {
 			.json({ success: false, message: "User Cannot be deleted successfully" });
 	}
 };
+
+exports.getAllUserDetails = async (req, res) => {
+	try {
+		const id = req.user.id;
+		const userDetails = await User.findById(id) //yaha pr hame sirf user id ki pta chle gi uska data ke liye populate krna padega
+			.populate("additionalDetails")
+			.exec();
+		console.log(userDetails);
+		res.status(200).json({
+			success: true,
+			message: "User Data fetched successfully",
+			data: userDetails,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: error.message,
+		});
+	}
+};
