@@ -82,6 +82,19 @@ exports.capturePayment = async (req, res) => {
             message:"Could not initiate order",
         });
     }
-    
-
 };
+//verify Signature of Razorpay and Server
+
+exports.verifySignature = async (req, res) => {
+    const webhookSecret = "12345678";   //ye secretkey sever pr hogi
+
+    const signature = req.headers["x-razorpay-signature"];  //ye secret key razorpay ke pass hoga
+
+    const shasum =  crypto.createHmac("sha256", webhookSecret);   //Hashed based method authentication course
+    shasum.update(JSON.stringify(req.body)); 
+    const digest = shasum.digest("hex");  //webhook secret key ko convert kr diya digest ke andr
+
+    if(signature === digest) {
+        console.log("Payment is Authorised");
+    }
+}
