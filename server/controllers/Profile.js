@@ -46,7 +46,6 @@ exports.deleteAccount = async (req, res) => {
 		}
 		// Delete Assosiated Profile with the User
 		await Profile.findByIdAndDelete({ _id: user.additionalDetails });
-		// TODO: Unenroll User From All the Enrolled Courses
 		// Now Delete User
 		await User.findByIdAndDelete({ _id: id });
 		res.status(200).json({
