@@ -1,9 +1,11 @@
-import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import HighlightText from '../components/HighlightText';
-import CTAButton from '../components/Button';
-import Banner from '../assets/Images/banner.mp4';
+import React from 'react'
+import {FaArrowRight} from "react-icons/fa"
+import {Link} from "react-router-dom"
+import HighlightText from '../components/HighlightText'
+
+import CTAButton from "../components/Button"
+import Banner from "../assets/Images/banner.mp4"
+import CodeBlocks from "../components/CodeBlocks"
 
 const Home = () => {
   return (
@@ -45,9 +47,47 @@ const Home = () => {
             <source src={Banner} type='video/mp4' />
           </video>
         </div>
-      </div>
-    </div>
-  );
-};
+      {/* Code Section 1 */}
+      <div>
+            <CodeBlocks 
+                position={"lg:flex-row"}
+                heading={
+                    <div className='text-4xl font-semibold'>
+                        Unlock Your
+                        <HighlightText text={"coding potential"}/>
+                        with our online courses
+                    </div>
+                }
+                subheading = {
+                    "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+                }
+                ctabtn1={
+                    {
+                        btnText: "try it yourself",
+                        linkto: "/signup",
+                        active: true,
+                    }
+                }
+                ctabtn2={
+                    {
+                        btnText: "learn more",
+                        linkto: "/login",
+                        active: false,
+                    }
+                }
 
-export default Home;
+                codeblock={`<<!DOCTYPE html>\n<html>\nhead><title>Example</title><linkrel="stylesheet"href="styles.css">\n/head>\n`}
+                codeColor={"text-yellow-25"}
+            />
+        </div>
+
+               
+    </div>
+
+
+    </div>
+  )
+}
+
+export default Home
+
