@@ -1,2 +1,2 @@
 SmartEdify is a user-friendly educational platform designed for easy and enjoyable learning. Using advanced technology (MERN stack), it allows you to create, explore, and rate educational content. Students benefit from a seamless and interactive learning experience, while instructors can showcase their expertise and connect with learners globally. It's all about making education accessible, engaging, and globally connected!
-It is currently a work in progress.
+
