@@ -13,7 +13,7 @@ exports.resetPasswordToken = async (req, res) => {
 				message: `This Email: ${email} is not Registered With Us Enter a Valid Email `,
 			});
 		}
-		const token = crypto.randomBytes(20).toString("hex"); //The output is something like this:94d2f5cc0f4f2d70d08f463f2881db
+		const token = crypto.randomBytes(20).toString("hex");
 
 		const updatedDetails = await User.findOneAndUpdate(
 			{ email: email },

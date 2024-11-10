@@ -2,13 +2,11 @@ const Course = require("../models/Course");
 const Category = require("../models/Category");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-// Function to create a new course
+
 exports.createCourse = async (req, res) => {
 	try {
-		// Get user ID from request object
-		const userId = req.user.id;    //jo ki payload me hai!!
+		const userId = req.user.id;
 
-		// Get all required fields from request body
 		let {
 			courseName,
 			courseDescription,
@@ -20,10 +18,8 @@ exports.createCourse = async (req, res) => {
 			instructions,
 		} = req.body;
 
-		// Get thumbnail image from request files
 		const thumbnail = req.files.thumbnailImage;
 
-		// Check if any of the required fields are missing
 		if (
 			!courseName ||
 			!courseDescription ||
@@ -110,7 +106,6 @@ exports.createCourse = async (req, res) => {
 			message: "Course Created Successfully",
 		});
 	} catch (error) {
-		// Handle any errors that occur during the creation of the course
 		console.error(error);
 		res.status(500).json({
 			success: false,
@@ -119,6 +114,7 @@ exports.createCourse = async (req, res) => {
 		});
 	}
 };
+
 exports.getAllCourses = async (req, res) => {
 	try {
 		const allCourses = await Course.find(
@@ -147,12 +143,10 @@ exports.getAllCourses = async (req, res) => {
 		});
 	}
 };
-//getCourseDetails
+
 exports.getCourseDetails = async (req, res) => {
     try {
-            //get id
             const {courseId} = req.body;
-            //find course details
             const courseDetails = await Course.find(
                                         {_id:courseId})
                                         .populate(
@@ -164,7 +158,7 @@ exports.getCourseDetails = async (req, res) => {
                                             }
                                         )
                                         .populate("category")
-                                        .populate("ratingAndreviews")
+                                        //.populate("ratingAndreviews")
                                         .populate({
                                             path:"courseContent",
                                             populate:{
@@ -180,7 +174,6 @@ exports.getCourseDetails = async (req, res) => {
                         message:`Could not find the course with ${courseId}`,
                     });
                 }
-                //return response
                 return res.status(200).json({
                     success:true,
                     message:"Course Details fetched successfully",

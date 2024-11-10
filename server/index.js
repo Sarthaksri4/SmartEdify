@@ -17,7 +17,7 @@ dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 database.connect();
-
+//middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -35,15 +35,18 @@ app.use(
 )
 cloudinaryConnect();
 
+//routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 
+
+
 app.get("/", (req, res) => {
 	return res.json({
 		success:true,
-		message:'Server is up and running'
+		message:'Your server is up and running....'
 	});
 });
 

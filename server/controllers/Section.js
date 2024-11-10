@@ -1,12 +1,9 @@
 const Section = require("../models/Section");
 const Course = require("../models/Course");
-// CREATE a new section
 exports.createSection = async (req, res) => {
 	try {
-		// Extract the required properties from the request body
 		const { sectionName, courseId } = req.body;
 
-		// Validate the input
 		if (!sectionName || !courseId) {
 			return res.status(400).json({
 				success: false,
@@ -14,7 +11,7 @@ exports.createSection = async (req, res) => {
 			});
 		}
 
-		// Create a new section with the given name
+		// Create a new section
 		const newSection = await Section.create({ sectionName });
 
 		// Add the new section to the course's content array
@@ -35,14 +32,12 @@ exports.createSection = async (req, res) => {
 			})
 			.exec();
 
-		// Return the updated course object in the response
 		res.status(200).json({
 			success: true,
 			message: "Section created successfully",
 			updatedCourse,
 		});
 	} catch (error) {
-		// Handle errors
 		res.status(500).json({
 			success: false,
 			message: "Internal server error",
@@ -50,7 +45,6 @@ exports.createSection = async (req, res) => {
 		});
 	}
 };
-// UPDATE a section
 exports.updateSection = async (req, res) => {
 	try {
 		const { sectionName, sectionId } = req.body;
@@ -71,7 +65,6 @@ exports.updateSection = async (req, res) => {
 		});
 	}
 };
-// DELETE a section
 exports.deleteSection = async (req, res) => {
 	try {
 		const { sectionId } = req.params; //get ID - asssuming that we are sending id in params
